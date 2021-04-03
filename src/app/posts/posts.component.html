@@ -1,0 +1,38 @@
+<div class="container">
+  <section>
+    <mat-button-toggle-group [(ngModel)]="groupBy" aria-label="Font Style">
+      <mat-button-toggle value="date" (click)="treeViewBy('date')"
+        >By Date</mat-button-toggle
+      >
+      <mat-button-toggle value="author" (click)="treeViewBy('author')"
+        >By Author</mat-button-toggle
+      >
+      <mat-button-toggle value="locavtion" (click)="treeViewBy('location')"
+        >By Location</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </section>
+</div>
+
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <a
+      href="#"
+      routerLinkActive="selected_item"
+      [routerLink]="['/posts', node.id]"
+      >{{ node.name }}</a
+    >
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button
+      mat-icon-button
+      matTreeNodeToggle
+      [attr.aria-label]="'Toggle ' + node.name"
+    >
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+      </mat-icon>
+    </button>
+    <span class="parent_node">{{ node.name }}</span>
+  </mat-tree-node>
+</mat-tree>

@@ -1,0 +1,78 @@
+<mat-card>
+  <ng-template #showSpinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+  <ng-container *ngIf="!loading; else showSpinner">
+    <mat-card-content>
+      <form [formGroup]="postForm">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Author</mat-label>
+            <input matInput placeholder="Author" formControlName="author" />
+            <mat-icon matSuffix>edit</mat-icon>
+            <mat-hint
+              *ngIf="
+                postForm.get('author').dirty &&
+                postForm.get('author').hasError('required')
+              "
+            >
+              <mat-icon>error</mat-icon>
+              <span class="hint_text"> First name is mandatory. </span>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput placeholder="Location" formControlName="location" />
+            <mat-icon matSuffix>edit</mat-icon>
+            <mat-hint
+              *ngIf="
+                postForm.get('location').dirty &&
+                postForm.get('location').hasError('required')
+              "
+            >
+              <mat-icon>error</mat-icon>
+              <span class="hint_text"> First name is mandatory. </span>
+            </mat-hint>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Time</mat-label>
+            <input
+              matInput
+              placeholder="Location"
+              formControlName="time"
+              readonly
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Text</mat-label>
+            <textarea
+              matInput
+              placeholder="Some text"
+              formControlName="text"
+              readonly
+              rows="4"
+            ></textarea>
+          </mat-form-field>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="update()"
+        mat-raised-button
+        [disabled]="!postForm.valid"
+        color="primary"
+      >
+        UPDATE POST
+      </button>
+    </mat-card-actions>
+  </ng-container>
+</mat-card>

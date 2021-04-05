@@ -1,16 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './material-module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [MaterialModule, RouterTestingModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
@@ -30,6 +27,9 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('nitro-test app is running!');
+    console.log(compiled.querySelector('.mat-toolbar span'));
+    expect(compiled.querySelector('.mat-toolbar span').textContent).toContain(
+      'Nitro Front End Proficiency Test'
+    );
   });
 });

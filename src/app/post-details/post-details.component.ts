@@ -74,6 +74,7 @@ export class PostDetailsComponent implements OnInit {
     if (this.postForm.valid) {
       this.postService.updatePost(post).pipe(untilDestroyed(this)).subscribe();
       // Optimistic way
+      // Actually after the update, I could update the tree view
     }
   }
 }

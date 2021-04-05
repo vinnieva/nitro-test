@@ -1,13 +1,15 @@
 <div class="container">
   <section>
     <mat-button-toggle-group [(ngModel)]="groupBy" aria-label="Font Style">
-      <mat-button-toggle value="date" (click)="treeViewBy('date')"
+      <mat-button-toggle value="date" (click)="treeViewBy(groupedBy.Date)"
         >By Date</mat-button-toggle
       >
-      <mat-button-toggle value="author" (click)="treeViewBy('author')"
+      <mat-button-toggle value="author" (click)="treeViewBy(groupedBy.Author)"
         >By Author</mat-button-toggle
       >
-      <mat-button-toggle value="locavtion" (click)="treeViewBy('location')"
+      <mat-button-toggle
+        value="location"
+        (click)="treeViewBy(groupedBy.Location)"
         >By Location</mat-button-toggle
       >
     </mat-button-toggle-group>

@@ -1,3 +1,4 @@
+import { GroupedBy } from './../enums/groupBy.enum';
 import { createTree, groupItemsBy, mapYearWeek } from './../utils/utils';
 import { Post } from './../models/post.model';
 import { FlatTreeControl } from '@angular/cdk/tree';
@@ -18,7 +19,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  groupBy = 'date';
+  groupedBy = GroupedBy;
+  groupBy = GroupedBy.Date;
+
   private _transformer = (node: PostNode, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
@@ -46,7 +49,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     //grouped by week
-    this.treeViewBy('date');
+    this.treeViewBy(this.groupedBy.Date);
   }
 
   treeViewBy(groupedBy: string) {

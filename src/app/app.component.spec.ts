@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -8,6 +9,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MaterialModule, RouterTestingModule],
       declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -27,7 +29,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    console.log(compiled.querySelector('.mat-toolbar span'));
     expect(compiled.querySelector('.mat-toolbar span').textContent).toContain(
       'Nitro Front End Proficiency Test'
     );

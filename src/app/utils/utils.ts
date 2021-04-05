@@ -1,3 +1,4 @@
+import { GroupedBy } from './../enums/groupBy.enum';
 import * as moment from 'moment';
 import { Post } from '../models/post.model';
 import { PostNode } from '../models/postNode.model';
@@ -12,13 +13,13 @@ export const createTree = (group: Post[], groupedBy: string): PostNode[] => {
   let tree_data: PostNode[];
 
   switch (groupedBy) {
-    case 'date':
+    case GroupedBy.Date:
       tree_data = fillParent([], group[0].time);
       break;
-    case 'author':
+    case GroupedBy.Author:
       tree_data = fillParent([], group[0].author);
       break;
-    case 'location':
+    case GroupedBy.Location:
       tree_data = fillParent([], group[0].location);
       break;
   }
@@ -38,7 +39,10 @@ export const getFormatDate = (time: string) =>
 export const getYearWeek = (time: string) =>
   `${moment(parseInt(time)).year()}-${moment(parseInt(time)).week()}`;
 
-const fillParent = (tree_data: PostNode[], groupBy: string): PostNode[] => {
+export const fillParent = (
+  tree_data: PostNode[],
+  groupBy: string
+): PostNode[] => {
   tree_data.push({
     name: groupBy,
     id: -1,
@@ -47,13 +51,13 @@ const fillParent = (tree_data: PostNode[], groupBy: string): PostNode[] => {
   return tree_data;
 };
 
-export const groupItemsBy = (post: Post, groupedBy: string) => {
+export const groupItemsBy = (post: Post, groupedBy: string): string => {
   switch (groupedBy) {
-    case 'date':
+    case GroupedBy.Date:
       return post.yearWeek;
-    case 'author':
+    case GroupedBy.Author:
       return post.author;
-    case 'location':
+    case GroupedBy.Location:
       return post.location;
   }
 };
